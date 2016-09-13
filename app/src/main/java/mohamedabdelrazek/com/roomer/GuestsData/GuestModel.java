@@ -11,7 +11,7 @@ public class GuestModel  implements Serializable{
     private String  Address;
     private String  Phone;
     private String  E_mail;
-    private String  id;
+    private int  id;
     private int gender;
     private int  age;
 
@@ -63,11 +63,11 @@ public class GuestModel  implements Serializable{
         this.age = age;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

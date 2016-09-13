@@ -23,7 +23,7 @@ public class ManageDataBase {
 
     }
 
-    public long UpdateInformation(String byID, GuestModel uGuestModel) {
+    public long UpdateInformation(int byID, GuestModel uGuestModel) {
         zSqLiteDatabase = zGuestsHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_GUEST_NAME, uGuestModel.getName());
@@ -33,7 +33,8 @@ public class ManageDataBase {
         contentValues.put(COLUMN_GUEST_Email, uGuestModel.getE_mail());
         contentValues.put(COLUMN_GUEST_GENDER, uGuestModel.getGender());
         contentValues.put(COLUMN_GUEST_AGE, uGuestModel.getAge());
-        long i = zSqLiteDatabase.update(TABLE_NAME, contentValues, _ID + " =?", new String[]{byID});
+        long i = zSqLiteDatabase.update(TABLE_NAME, contentValues, _ID + " = "+byID,null);
+
         return i;
     }
 
@@ -62,7 +63,7 @@ public class ManageDataBase {
 
         while (zCursor.moveToNext()) {
             GuestModel guestModel = new GuestModel();
-            guestModel.setId(zCursor.getString(zCursor.getColumnIndex(_ID)));
+            guestModel.setId(zCursor.getInt(zCursor.getColumnIndex(_ID)));
             guestModel.setName(zCursor.getString(zCursor.getColumnIndex(COLUMN_GUEST_NAME)));
             guestModel.setAge(zCursor.getInt(zCursor.getColumnIndex(COLUMN_GUEST_AGE)));
             guestModel.setAddress(zCursor.getString(zCursor.getColumnIndex(COLUMN_GUEST_ADDRESS)));
@@ -77,7 +78,7 @@ public class ManageDataBase {
     private class GuestsHelper extends SQLiteOpenHelper {
 
         private static final String DATA_BASE_NAME = "GUESTS.db";
-        private static final int VERSION = 2;
+        private static final int VERSION = 3;
 
 
         public GuestsHelper(Context context) {
@@ -86,7 +87,7 @@ public class ManageDataBase {
 
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
-            String CREATE_GUESTS_TABLE = "create table " + TABLE_NAME + "(" + _ID + " TEXT PRIMARY KEY,"
+            String CREATE_GUESTS_TABLE = "create table " + TABLE_NAME + "(" + _ID + " INTEGER PRIMARY KEY,"
                     + COLUMN_GUEST_NAME + " TEXT NOT NULL , " + COLUMN_GUEST_AGE + " INTEGER,"
                     + COLUMN_GUEST_GENDER + " INTEGER NOT NULL," + COLUMN_GUEST_ADDRESS + " TEXT NOT NULL,"
                     + COLUMN_GUEST_MOBILE_NUMBER + " TEXT NOT NULL," + COLUMN_GUEST_Email + " TEXT );";

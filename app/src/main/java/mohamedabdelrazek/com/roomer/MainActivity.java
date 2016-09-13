@@ -1,5 +1,7 @@
 package mohamedabdelrazek.com.roomer;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     ManageDataBase manageDataBase;
     GustsAdapter adapter;
+    ArrayList<GuestModel> dArray;
     ArrayList<String> sArrayList; // to save a pure copy of Gusts names will be used in searching..,......
 
 
@@ -31,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
         sArrayList = new ArrayList<>();
         manageDataBase = new ManageDataBase(this);
         listView = (ListView) findViewById(R.id.zListView);
-
-
-        // listView.setAdapter(adapter);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,10 +47,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                intent.putExtra("data", getAllData().get(i));
+                intent.putExtra("data", dArray.get(i));
                 startActivity(intent);
-
-
             }
         });
 
@@ -60,28 +59,49 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        dArray=getAllData();
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new GustsAdapter(this, getAllData());
+        Log.i("ZOKA", "ON START");
+        adapter = new GustsAdapter(this, dArray);
         listView.setAdapter(adapter);
-        for (int i = 0; i < getAllData().size(); i++) {
-            GuestModel guestModel = getAllData().get(i);
-            sArrayList.add(guestModel.getName());
 
-        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/main_menul file.
         // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);
+        searchView.setIconified(false);
+        final Context c = this;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String key) {
+                searchIn(key);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String key) {
+                searchIn(key);
+                return false;
+            }
+        });
+
         return true;
     }
+
 
     public ArrayList<GuestModel> getAllData()
 
@@ -108,5 +128,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void searchIn(String key) {
+
+        dArray.clear();
+        for (int i = 0; i < getAllData().size(); i++) {
+            if (getAllData().get(i).getName().toLowerCase().contains(key)) {
+                dArray.add(getAllData().get(i));
+            }
+        }
+        adapter.notifyDataSetChanged();
+    }
 
 }

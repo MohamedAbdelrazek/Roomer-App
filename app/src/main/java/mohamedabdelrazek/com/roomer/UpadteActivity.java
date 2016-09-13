@@ -1,5 +1,6 @@
 package mohamedabdelrazek.com.roomer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
@@ -13,9 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.ManageDataBase;
-import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.*;
+
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.GENDER_FEMALE;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.GENDER_MALE;
+
 public class UpadteActivity extends AppCompatActivity {
     GuestModel guestModel;
     private ManageDataBase uManageDataBase;
@@ -27,7 +32,7 @@ public class UpadteActivity extends AppCompatActivity {
     private EditText uAddress;
     private EditText uMobileNumber;
     private EditText uEmail;
-    private String OLDID;
+    private int OLDID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,37 +105,63 @@ public class UpadteActivity extends AppCompatActivity {
     private void updateInformation() {
 
         GuestModel guestModel = new GuestModel();
+
         try {
-            if (uName.getText().toString().length() >= 1) {
+
+            if (uName.getText().toString().length() > 1) {
                 guestModel.setName(uName.getText().toString());
             }
-            if (uAddress.getText().toString().length() >= 1) {
+            if (uAddress.getText().toString().length() > 1) {
                 guestModel.setAddress(uAddress.getText().toString());
             }
-            if (uEmail.getText().toString().length() >= 1) {
+            if (uEmail.getText().toString().length() > 1) {
                 guestModel.setE_mail(uEmail.getText().toString());
             }
-            if (uMobileNumber.getText().toString().length() >= 1) {
+            if (uMobileNumber.getText().toString().length() > 1) {
                 guestModel.setPhone(uMobileNumber.getText().toString());
             }
             guestModel.setGender(uGender); // default value set to be Male ;
-            guestModel.setAge(Integer.parseInt(uAge.getText().toString()));// if the user doesnt enter any values it will throw
+            guestModel.setAge(Integer.parseInt(uAge.getText().toString()));
+            guestModel.setId(Integer.parseInt(uId.getText().toString()));
 
-            if (uId.getText().toString().length() >= 1) {
-                //to avoid  " " value  cause id is String type
-                guestModel.setId(uId.getText().toString());
+            long i = uManageDataBase.UpdateInformation(OLDID, guestModel);
+            if (i != -1) {
+                final ProgressDialog progress = ProgressDialog.show(UpadteActivity.this, "Update Guest Info ...",
+                        "please wait", true);
+
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                progress.dismiss();
+                                Intent intent = new Intent(UpadteActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(UpadteActivity.this, "Guest information updated", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+                }).start();
             }
-            long result = uManageDataBase.UpdateInformation(OLDID, guestModel);
-            if (result != -1) {
-                Toast.makeText(UpadteActivity.this, "Information Updated Successfully !", Toast.LENGTH_LONG).show();
-            }
+
         } catch (NumberFormatException r) { //if no value for age entered .
-            Toast.makeText(UpadteActivity.this, "PLZ enter the age!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpadteActivity.this, "empty Values not acceptable", Toast.LENGTH_SHORT).show();
         } catch (SQLiteConstraintException e) {
             String message = e.getMessage();
             Toast.makeText(UpadteActivity.this, message.substring(message.indexOf(".") + 1, message.indexOf("(")), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(UpadteActivity.this, "Exception EE ", Toast.LENGTH_SHORT).show();
+
+            // empty  exception  for handling non predicatable exceptionS...
 
         }
     }
@@ -140,7 +171,7 @@ public class UpadteActivity extends AppCompatActivity {
         uAddress.setText(guestModel.getAddress());
         uAge.setText("" + guestModel.getAge());
         uEmail.setText("" + guestModel.getE_mail());
-        uId.setText(guestModel.getId());
+        uId.setText("" + guestModel.getId());
         uMobileNumber.setText(guestModel.getPhone());
     }
 }

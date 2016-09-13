@@ -1,5 +1,8 @@
 package mohamedabdelrazek.com.roomer;
 
+import android.app.ActivityManager;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -116,25 +119,47 @@ public class AddGuestActivity extends AppCompatActivity {
                 guestModel.setPhone(zMobileNumber.getText().toString());
             }
             guestModel.setGender(zGender); // default value set to be Male ;
-            guestModel.setAge(Integer.parseInt(zAge.getText().toString()));// if the user doesnt enter any values it will throw
+            guestModel.setAge(Integer.parseInt(zAge.getText().toString()));
+            guestModel.setId(Integer.parseInt(zId.getText().toString()));
 
-            if (zId.getText().toString().length() >= 1 && zId.getText().toString() != " ") {
-                //to avoid  " " value  cause id is String type
-                guestModel.setId(zId.getText().toString());
-            }
             long i = zManageDataBase.insertGuestInformation(guestModel);
             if (i != -1) {
+                final ProgressDialog progress = ProgressDialog.show(AddGuestActivity.this, "Adding Guest Info ...",
+                        "please wait", true);
 
-                Toast.makeText(AddGuestActivity.this, "Guest INFO saved", Toast.LENGTH_SHORT).show();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                progress.dismiss();
+                                Intent intent = new Intent(AddGuestActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(AddGuestActivity.this, "Guest information saved", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+                }).start();
             }
 
         } catch (NumberFormatException r) { //if no value for age entered .
-            Toast.makeText(AddGuestActivity.this, "numer", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddGuestActivity.this, "empty Values not acceptable", Toast.LENGTH_SHORT).show();
         } catch (SQLiteConstraintException e) {
             String message = e.getMessage();
             Toast.makeText(AddGuestActivity.this, message.substring(message.indexOf(".") + 1, message.indexOf("(")), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
 
+            // empty  exception  for handling non predicatable exceptionS...
 
         }
 

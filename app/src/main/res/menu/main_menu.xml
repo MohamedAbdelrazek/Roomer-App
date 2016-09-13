@@ -14,8 +14,9 @@
         android:title="@string/action_delete_all_entries"
         app:showAsAction="never" />
     <item
-        android:id="@+id/search"
+        android:id="@+id/action_search"
         android:title="@string/action_Search"
-        android:icon="@drawable/search"
-        app:showAsAction="always" />
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="android.widget.SearchView"
+        android:icon="@drawable/se" />
 </menu>

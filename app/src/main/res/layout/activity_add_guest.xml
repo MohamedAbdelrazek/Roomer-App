@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_margin"
+    tools:context=".AddGuestActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Overview" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingLeft="4dp">
+
+                <EditText
+                    android:id="@+id/zNAmeEdt"
+                    style="@style/EditorFieldStyle"
+                    android:hint="Name"
+
+                    android:inputType="textCapWords" />
+
+                <EditText
+                    android:id="@+id/zAgeEdt"
+                    style="@style/EditorFieldStyle"
+                    android:hint="age"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/zIdEdt"
+                    style="@style/EditorFieldStyle"
+                    android:hint="id"
+                    android:inputType="number" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="@string/category_gender" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <Spinner
+                    android:id="@+id/spinner_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:paddingRight="16dp"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_measurement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Address" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingLeft="4dp">
+
+                <EditText
+                    android:id="@+id/zAddress"
+                    style="@style/EditorFieldStyle"
+                    android:hint="Address"
+                    android:inputType="textCapWords" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Mobile Number" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingLeft="4dp">
+
+                <EditText
+                    android:id="@+id/zPhoneNumber"
+                    style="@style/EditorFieldStyle"
+                    android:hint="Phone Number"
+                    android:inputType="number" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_fdfmeasurement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/CategoryStyle"
+                android:text="Email" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingLeft="4dp">
+
+                <EditText
+                    android:id="@+id/zEmail"
+                    style="@style/EditorFieldStyle"
+                    android:hint="Email Address (Optional)"
+                    android:inputType="text" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

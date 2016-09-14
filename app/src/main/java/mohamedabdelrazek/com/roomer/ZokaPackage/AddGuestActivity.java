@@ -1,4 +1,4 @@
-package mohamedabdelrazek.com.roomer;
+package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.ManageDataBase;
+import mohamedabdelrazek.com.roomer.R;
 
 import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.GENDER_FEMALE;
 import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.GENDER_MALE;

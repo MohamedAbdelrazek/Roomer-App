@@ -1,4 +1,4 @@
-package mohamedabdelrazek.com.roomer;
+package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.GuestsContract;
+import mohamedabdelrazek.com.roomer.R;
 
 /**
  * Created by Mohamed on 9/10/2016.

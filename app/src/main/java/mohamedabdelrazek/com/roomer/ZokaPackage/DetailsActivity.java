@@ -1,4 +1,4 @@
-package mohamedabdelrazek.com.roomer;
+package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.GuestsContract;
 import mohamedabdelrazek.com.roomer.GuestsData.ManageDataBase;
+import mohamedabdelrazek.com.roomer.R;
 
 public class DetailsActivity extends AppCompatActivity {
     private GuestModel guestModel;

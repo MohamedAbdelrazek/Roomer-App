@@ -1,4 +1,4 @@
-package mohamedabdelrazek.com.roomer;
+package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.ManageDataBase;
+import mohamedabdelrazek.com.roomer.R;
 
 public class MainActivity extends AppCompatActivity {
     private ListView listView;

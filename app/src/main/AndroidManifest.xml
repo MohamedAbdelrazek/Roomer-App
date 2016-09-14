@@ -9,32 +9,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AddGuestActivity"
+            android:name=".ZokaPackage.AddGuestActivity"
             android:label="Add a new Guest"
             android:noHistory="true"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ZokaPackage.MainActivity"
             android:theme="@style/EditorTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ZokaPackage.MainActivity"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity
-            android:name=".DetailsActivity"
+            android:name=".ZokaPackage.DetailsActivity"
             android:label="Guest Details"
             android:noHistory="true"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ZokaPackage.MainActivity"
             android:theme="@style/EditorTheme"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".UpadteActivity"
+            android:name=".ZokaPackage.UpadteActivity"
             android:label="Edit Guest Info ..."
             android:noHistory="true"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ZokaPackage.MainActivity"
             android:theme="@style/EditorTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".ZokaPackage.SplashScreen"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

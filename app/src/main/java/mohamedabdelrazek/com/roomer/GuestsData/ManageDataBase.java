@@ -5,9 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.*;
 
 import java.util.ArrayList;
+
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.COLUMN_GUEST_ADDRESS;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.COLUMN_GUEST_AGE;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.COLUMN_GUEST_Email;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.COLUMN_GUEST_GENDER;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.COLUMN_GUEST_MOBILE_NUMBER;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.COLUMN_GUEST_NAME;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.TABLE_NAME;
+import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry._ID;
 
 /**
  * Created by Mohamed on 9/10/2016.

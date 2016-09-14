@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The app branding color for the app bar -->
+
 
     <color name="background">#f0f8ff</color>
     <color name="colorPrimary">#c10000</color>
     <color name="colorPrimaryDark">#8b2221</color>
-
     <color name="colorAccent">#8D6E63</color>
-    <color name="editorColorPrimary">#c260ba</color>
 
+    <color name="editorColorPrimary">#c260ba</color>
     <color name="editorColorPrimaryDark">#394450</color>
 </resources>

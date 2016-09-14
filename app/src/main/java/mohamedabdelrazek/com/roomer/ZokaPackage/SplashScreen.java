@@ -1,4 +1,4 @@
-package mohamedabdelrazek.com.roomer;
+package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import mohamedabdelrazek.com.roomer.R;
 
 public class SplashScreen extends AppCompatActivity {
     private  TextView textView;

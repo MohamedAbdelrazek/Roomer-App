@@ -10,7 +10,7 @@
     android:background="@color/background"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="mohamedabdelrazek.com.roomer.SplashScreen">
+    tools:context=".ZokaPackage.SplashScreen">
 
     <ImageView
         android:id="@+id/splash_image"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:clickable="false"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/splash_image"/>
     <TextView
         android:id="@+id/splash_text"
         android:layout_width="match_parent"

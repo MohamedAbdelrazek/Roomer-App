@@ -1,4 +1,4 @@
-package mohamedabdelrazek.com.roomer;
+package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.ManageDataBase;
+import mohamedabdelrazek.com.roomer.R;
 
 import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.GENDER_FEMALE;
 import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.GENDER_MALE;
@@ -30,6 +30,7 @@ public class UpadteActivity extends AppCompatActivity {
     private EditText uName;
     private EditText uAge;
     private EditText uId;
+    private ArrayAdapter genderSpinnerAdapter;
     private EditText uAddress;
     private EditText uMobileNumber;
     private EditText uEmail;
@@ -47,10 +48,11 @@ public class UpadteActivity extends AppCompatActivity {
         uMobileNumber = (EditText) findViewById(R.id.uPhoneNumber);
         uEmail = (EditText) findViewById(R.id.uEmail);
         uGenderSpinner = (Spinner) findViewById(R.id.uSpinner_gender);
-        setupSpinner();
+
         Intent intent = getIntent();
         guestModel = (GuestModel) intent.getSerializableExtra("UPDATE");
         OLDID = guestModel.getId();
+        setupSpinner();
         RestoreDefaultValues();
 
 
@@ -58,16 +60,18 @@ public class UpadteActivity extends AppCompatActivity {
 
 
     private void setupSpinner() {
-        ArrayAdapter genderSpinnerAdapter = ArrayAdapter.createFromResource(this,
+        genderSpinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.array_gender_options, android.R.layout.simple_spinner_item);
 
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         uGenderSpinner.setAdapter(genderSpinnerAdapter);
         uGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
+
                     if (selection.equals(getString(R.string.gender_male))) {
 
                         uGender = GENDER_MALE; // Male
@@ -78,8 +82,7 @@ public class UpadteActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+            public void onNothingSelected(AdapterView<?> parent) {
                 uGender = GENDER_MALE; // Male
             }
         });
@@ -174,5 +177,16 @@ public class UpadteActivity extends AppCompatActivity {
         uEmail.setText("" + guestModel.getE_mail());
         uId.setText("" + guestModel.getId());
         uMobileNumber.setText(guestModel.getPhone());
+        setgender();
+    }
+
+    public void setgender() {
+        if (guestModel.getGender() == GENDER_MALE) {
+            genderSpinnerAdapter.getPosition("Male");
+
+            uGenderSpinner.setSelection(genderSpinnerAdapter.getPosition("Male"));
+        } else
+
+            uGenderSpinner.setSelection(genderSpinnerAdapter.getPosition("Female"));
     }
 }

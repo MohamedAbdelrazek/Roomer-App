@@ -1,6 +1,5 @@
 package mohamedabdelrazek.com.roomer;
 
-import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
@@ -79,7 +78,7 @@ public class AddGuestActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.detalis_menu, menu);
+        getMenuInflater().inflate(R.menu.add_guest_menu, menu);
         return true;
     }
 
@@ -90,10 +89,6 @@ public class AddGuestActivity extends AppCompatActivity {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 SaveGuestData();
-                return true;
-            // Respond to a click on the "Delete" menu option
-            case R.id.action_delete:
-                // Do nothing for now
                 return true;
 
         }

@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
 import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.GuestsContract;
 
@@ -20,11 +22,11 @@ public class GustsAdapter extends BaseAdapter {
     private ArrayList<GuestModel> GuestList;
 
     private class ViewHolder {
-        public TextView name;
-        public TextView phone;
-        public ImageView genderImage;
+        private TextView name;
+        private TextView phone;
+        private ImageView genderImage;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             name = (TextView) view.findViewById(R.id.mName);
             phone = (TextView) view.findViewById(R.id.mPhone);
             genderImage = (ImageView) view.findViewById(R.id.mGenderImage);

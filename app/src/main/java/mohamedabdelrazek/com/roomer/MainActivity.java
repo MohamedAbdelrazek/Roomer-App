@@ -1,18 +1,17 @@
 package mohamedabdelrazek.com.roomer;
 
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,21 +20,23 @@ import mohamedabdelrazek.com.roomer.GuestsData.GuestModel;
 import mohamedabdelrazek.com.roomer.GuestsData.ManageDataBase;
 
 public class MainActivity extends AppCompatActivity {
-    ListView listView;
-    ManageDataBase manageDataBase;
-    GustsAdapter adapter;
-    ArrayList<GuestModel> dArray;
-    ArrayList<String> sArrayList; // to save a pure copy of Gusts names will be used in searching..,......
+    private ListView listView;
+    private ManageDataBase manageDataBase;
+    private GustsAdapter adapter;
+    private SearchView searchView;
+    private TextView mainText;
+    private ArrayList<GuestModel> dArray;
+    private FloatingActionButton fab;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sArrayList = new ArrayList<>();
         manageDataBase = new ManageDataBase(this);
         listView = (ListView) findViewById(R.id.zListView);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add);
+        mainText = (TextView) findViewById(R.id.main_text);
+        fab = (FloatingActionButton) findViewById(R.id.fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,17 +61,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        dArray=getAllData();
+
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("ZOKA", "ON START");
+        dArray = getAllData();
+
+        //  if the  list empty a Text view will appear with a message no Roomers ! // that's all .........
+
+        if (dArray.size() >= 1) {
+
+            mainText.setVisibility(View.GONE);
+
+        }
         adapter = new GustsAdapter(this, dArray);
         listView.setAdapter(adapter);
-
     }
 
 
@@ -80,21 +88,23 @@ public class MainActivity extends AppCompatActivity {
         // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false);
-        searchView.setIconified(false);
-        final Context c = this;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String key) {
-                searchIn(key);
+            public boolean onQueryTextSubmit(String query) {
+                performNewSearch(query);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String key) {
-                searchIn(key);
+
+                performNewSearch(key);
+
+
                 return false;
             }
         });
@@ -115,24 +125,17 @@ public class MainActivity extends AppCompatActivity {
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
-            case R.id.action_insert_dummy_data:
-                // Do nothing for now
-                return true;
-            // Respond to a click on the "Delete all entries" menu option
-            case R.id.action_delete_all_entries:
-                for (int i = 0; i < sArrayList.size(); i++) {
-                    Log.i("ZOKA", " " + i + "  " + sArrayList.get(i));
-                }
-                return true;
+            case R.id.action_search:
+                searchView.setIconified(false); // to hide keyboard when the app start and show it when the user hit the search icon ...
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void searchIn(String key) {
+    private void performNewSearch(String query) {
 
         dArray.clear();
         for (int i = 0; i < getAllData().size(); i++) {
-            if (getAllData().get(i).getName().toLowerCase().contains(key)) {
+            if (getAllData().get(i).getName().toLowerCase().contains(query)) {
                 dArray.add(getAllData().get(i));
             }
         }

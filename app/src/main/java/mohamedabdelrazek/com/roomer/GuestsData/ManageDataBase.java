@@ -53,6 +53,13 @@ public class ManageDataBase {
         return x;
 
     }
+    public int removeGustInformation(int   id) {
+        zSqLiteDatabase = zGuestsHelper.getWritableDatabase();
+     int r=   zSqLiteDatabase.delete(TABLE_NAME, _ID + " =  " + id, null);
+        return r;
+
+
+    }
 
     ArrayList<GuestModel> arrayList;
 

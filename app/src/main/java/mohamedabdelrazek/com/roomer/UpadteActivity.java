@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,7 @@ import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry
 import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry.GENDER_MALE;
 
 public class UpadteActivity extends AppCompatActivity {
-    GuestModel guestModel;
+    private GuestModel guestModel;
     private ManageDataBase uManageDataBase;
     private Spinner uGenderSpinner;
     private int uGender = GENDER_MALE;
@@ -62,7 +63,6 @@ public class UpadteActivity extends AppCompatActivity {
 
         genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         uGenderSpinner.setAdapter(genderSpinnerAdapter);
-
         uGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -78,7 +78,8 @@ public class UpadteActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> parent)
+            {
                 uGender = GENDER_MALE; // Male
             }
         });

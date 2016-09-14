@@ -9,5 +9,9 @@
         android:title="@string/action_save"
         android:icon="@drawable/pen"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_remove"
+        android:title="@string/action_remove"
+        app:showAsAction="never" />
 
 </menu>

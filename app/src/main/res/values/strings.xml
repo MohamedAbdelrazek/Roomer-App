@@ -1,17 +1,16 @@
 <resources>
-    <string name="app_name">Roomer</string>
+    <string name="app_name">Roomers</string>
     <string name="title_activity_main2">Roomer</string>
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <string name="action_delete_all_entries">Remove All</string>
     <string name="action_Search">Search</string>
     <string name="action_save">Save</string>
     <string name="action_edit">Edit</string>
-    <string name="action_delete">Delete</string>
+    <string name="action_remove">Delete</string>
     <string name="category_gender">Gender</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
     <string-array name="array_gender_options">
-
         <item>@string/gender_male</item>
         <item>@string/gender_female</item>
     </string-array>

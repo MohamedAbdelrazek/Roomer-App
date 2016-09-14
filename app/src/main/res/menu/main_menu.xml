@@ -6,17 +6,9 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_insert_dummy_data"
-        android:title="@string/action_insert_dummy_data"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_delete_all_entries"
-        android:title="@string/action_delete_all_entries"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_search"
         android:title="@string/action_Search"
         app:showAsAction="collapseActionView|ifRoom"
         app:actionViewClass="android.widget.SearchView"
-        android:icon="@drawable/se" />
+        android:icon="@drawable/__" />
 </menu>

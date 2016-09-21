@@ -1,7 +1,6 @@
 package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -138,9 +137,9 @@ public class AddGuestActivity extends AppCompatActivity {
                             public void run() {
 
                                 progress.dismiss();
-                                Intent intent = new Intent(AddGuestActivity.this, MainActivity.class);
-                                startActivity(intent);
+
                                 Toast.makeText(AddGuestActivity.this, "Guest information saved", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
 

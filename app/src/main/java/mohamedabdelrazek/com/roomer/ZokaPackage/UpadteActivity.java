@@ -148,9 +148,8 @@ public class UpadteActivity extends AppCompatActivity {
                             public void run() {
 
                                 progress.dismiss();
-                                Intent intent = new Intent(UpadteActivity.this, MainActivity.class);
-                                startActivity(intent);
                                 Toast.makeText(UpadteActivity.this, "Guest information updated", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
 

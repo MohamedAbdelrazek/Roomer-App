@@ -89,9 +89,8 @@ public class DetailsActivity extends AppCompatActivity {
                         public void run() {
 
                             progress.dismiss();
-                            Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
-                            startActivity(intent);
                             Toast.makeText(DetailsActivity.this, "Guest information removed", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
 

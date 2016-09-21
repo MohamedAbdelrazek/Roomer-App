@@ -36,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         manageDataBase = new ManageDataBase(this);
         listView = (ListView) findViewById(R.id.zListView);
-        mainText = (TextView) findViewById(R.id.main_text);
+        dArray=new ArrayList<>();
+
+        View emptyView= findViewById(R.id.empty_view);
+
         fab = (FloatingActionButton) findViewById(R.id.fab_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        adapter = new GustsAdapter(this, dArray);
+        listView.setEmptyView(emptyView);
+        listView.setAdapter(adapter);
 
 
     }
@@ -70,14 +76,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         dArray = getAllData();
-
-        //  if the  list empty a Text view will appear with a message no Roomers ! // that's all .........
-
-        if (dArray.size() >= 1) {
-
-            mainText.setVisibility(View.GONE);
-
-        }
         adapter = new GustsAdapter(this, dArray);
         listView.setAdapter(adapter);
     }

@@ -1,7 +1,6 @@
 package mohamedabdelrazek.com.roomer.ZokaPackage;
 
 import android.app.LoaderManager;
-import android.app.SearchManager;
 import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -11,12 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -37,11 +33,9 @@ import static mohamedabdelrazek.com.roomer.GuestsData.GuestsContract.GuestsEntry
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private ListView zGuestslistView;
     private GuestsCursorAdapter zCursorAdapter;
-    private SearchView searchView;
     private View emptyView;
     private FloatingActionButton fab;
-    Cursor zCursor;
-    private final int ROMER_LOADER = 0;
+    private final int ROOMER_LOADER = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         zGuestslistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-              Uri uri=   ContentUris.withAppendedId(CONTENT_URI,id);
-                Intent intent=new Intent(MainActivity.this, DetailsActivity.class);
+                Uri uri = ContentUris.withAppendedId(CONTENT_URI, id);
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
                 intent.setData(uri);
                 startActivity(intent);
 
@@ -71,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         zCursorAdapter = new GuestsCursorAdapter(this, null);
 
         zGuestslistView.setAdapter(zCursorAdapter);
-        getLoaderManager().initLoader(ROMER_LOADER, null, this);
+        getLoaderManager().initLoader(ROOMER_LOADER, null, this);
 
     }
 
@@ -81,35 +75,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onStart();
 
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/main_menul file.
-        // This adds menu items to the app bar.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                performNewSearch(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String key) {
-
-                performNewSearch(key);
-
-                return false;
-            }
-        });
-
-        return true;
     }
 
 
@@ -137,27 +102,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // User clicked on a menu option in the app bar overflow menu
-        switch (item.getItemId()) {
-            // Respond to a click on the "Insert dummy data" menu option
-            case R.id.action_search:
-
-                searchView.setIconified(false); // to hide keyboard when the app start and show it when the user hit the search icon ...
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void performNewSearch(String query) {
-
-
-    }
-
-    @Override
     public Loader onCreateLoader(int i, Bundle bundle) {
 
 
-        String[] projection={_ID,COLUMN_GUEST_NAME,COLUMN_GUEST_MOBILE_NUMBER,COLUMN_GUEST_GENDER};
+        String[] projection = {_ID, COLUMN_GUEST_NAME, COLUMN_GUEST_MOBILE_NUMBER, COLUMN_GUEST_GENDER};
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
                 GuestsContract.GuestsEntry.CONTENT_URI,   // Provider content URI to query
@@ -172,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
-     zCursorAdapter.swapCursor(cursor);
+        zCursorAdapter.swapCursor(cursor);
     }
 
 

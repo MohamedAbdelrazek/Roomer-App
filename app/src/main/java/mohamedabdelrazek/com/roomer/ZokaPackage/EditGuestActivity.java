@@ -119,16 +119,16 @@ public class EditGuestActivity extends AppCompatActivity implements LoaderManage
         try {
 
 
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(COLUMN_GUEST_NAME, zName.getText().toString());
-                contentValues.put(COLUMN_GUEST_AGE, zAge.getText().toString());
-                contentValues.put(COLUMN_GUEST_MOBILE_NUMBER, zMobile.getText().toString());
-                contentValues.put(COLUMN_GUEST_ADDRESS, zAddress.getText().toString());
-                contentValues.put(COLUMN_GUEST_Email, zEmail.getText().toString());
-                contentValues.put(COLUMN_GUEST_GENDER, zGender);
-                contentValues.put(NATIONNAL_ID, zId.getText().toString());
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_GUEST_NAME, zName.getText().toString());
+            contentValues.put(COLUMN_GUEST_AGE, zAge.getText().toString());
+            contentValues.put(COLUMN_GUEST_MOBILE_NUMBER, zMobile.getText().toString());
+            contentValues.put(COLUMN_GUEST_ADDRESS, zAddress.getText().toString());
+            contentValues.put(COLUMN_GUEST_Email, zEmail.getText().toString());
+            contentValues.put(COLUMN_GUEST_GENDER, zGender);
+            contentValues.put(NATIONNAL_ID, zId.getText().toString());
 
-            if (dCurrentUri==null) {
+            if (dCurrentUri == null) {
                 Uri zUri = getContentResolver().insert(GuestsContract.GuestsEntry.CONTENT_URI, contentValues);
                 if (zUri == null) {
                     // If the new content URI is null, then there was an error with insertion.
@@ -138,11 +138,10 @@ public class EditGuestActivity extends AppCompatActivity implements LoaderManage
                     // Otherwise, the insertion was successful and we can display a toast.
                     Toast.makeText(this, getString(R.string.editor_insert_guest_successful),
                             Toast.LENGTH_SHORT).show();
+                    finish();
 
                 }
-            }
-            else
-            {
+            } else {
                 // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri
                 // and pass in the new ContentValues. Pass in null for the selection and selection args
                 // because mCurrentPetUri will already identify the correct row in the database that
@@ -158,23 +157,24 @@ public class EditGuestActivity extends AppCompatActivity implements LoaderManage
                     // Otherwise, the update was successful and we can display a toast.
                     Toast.makeText(this, getString(R.string.editor_update_guest_successful),
                             Toast.LENGTH_SHORT).show();
+                    finish();
 
                 }
 
             }
-            }catch(NumberFormatException e){
-                Toast.makeText(EditGuestActivity.this, "plz specify the age !", Toast.LENGTH_SHORT).show();
+        } catch (NumberFormatException e) {
+            Toast.makeText(EditGuestActivity.this, "plz specify the age !", Toast.LENGTH_SHORT).show();
 
 
-            }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
 
-                Toast.makeText(EditGuestActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }catch(SQLiteConstraintException e){
-                Toast.makeText(EditGuestActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditGuestActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (SQLiteConstraintException e) {
+            Toast.makeText(EditGuestActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-            }
-        finish();
         }
+
+    }
 
 
     @Override

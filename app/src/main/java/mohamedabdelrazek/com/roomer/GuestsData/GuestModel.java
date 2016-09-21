@@ -11,9 +11,10 @@ public class GuestModel  implements Serializable{
     private String  Address;
     private String  Phone;
     private String  E_mail;
-    private int  id;
+    private String national_id;
+    private String   id;
     private int gender;
-    private int  age;
+    private String  age;
 
     public int getGender() {
         return gender;
@@ -55,19 +56,23 @@ public class GuestModel  implements Serializable{
         E_mail = e_mail;
     }
 
-    public int getAge() {
+    public String  getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String  age) {
         this.age = age;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public void setNational_id(String national_id) {
+        this.national_id = national_id;
     }
 }

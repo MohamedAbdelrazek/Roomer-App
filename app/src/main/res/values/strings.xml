@@ -13,5 +13,14 @@
     <string-array name="array_gender_options">
         <item>@string/gender_male</item>
         <item>@string/gender_female</item>
-    </string-array>
+
+    </string-array>  <string name="editor_update_guest_successful">Guest updated</string>
+
+    <!-- Toast message in editor when current guest has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="editor_update_guest_failed">Error with updating Guest</string>
+
+    <string name="editor_insert_guest_successful">Guest saved</string>
+
+    <!-- Toast message in editor when new guest has failed to be inserted  -->
+    <string name="editor_insert_guest_failed">Error with saving Guest</string>
 </resources>

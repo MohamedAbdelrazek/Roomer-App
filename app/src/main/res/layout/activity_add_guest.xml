@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:padding="@dimen/activity_margin"
-    tools:context=".ZokaPackage.AddGuestActivity">
+    tools:context=".ZokaPackage.EditGuestActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

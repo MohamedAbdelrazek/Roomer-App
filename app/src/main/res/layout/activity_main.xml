@@ -5,19 +5,25 @@
     android:layout_margin="10dp"
     android:background="@color/background">
 
-    <TextView
-        android:id="@+id/main_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="No Roomers !"
-        android:textAlignment="center"
-        android:textSize="20sp" />
 
     <ListView
         android:id="@+id/zListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"></ListView>
+
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/empty_view"
+        >
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="No Roomers !"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add"
